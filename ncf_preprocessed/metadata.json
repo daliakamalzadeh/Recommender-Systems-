@@ -1,0 +1,17 @@
+{
+  "ratings_path": "ml-1m/ratings.dat",
+  "positive_threshold": 4,
+  "negatives_per_positive": 1,
+  "random_seed": 42,
+  "split_ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "num_original_ratings": 1000209,
+  "num_positive_interactions": 575281,
+  "num_negative_interactions": 575281,
+  "num_total_interactions": 1150562,
+  "num_users": 6040,
+  "num_items": 3706
+}
