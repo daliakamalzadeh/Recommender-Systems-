@@ -20,7 +20,7 @@ class SASRecBlock(nn.Module):
         self.norm2 = nn.LayerNorm(hidden_size)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, x, causal_mask):
+    def forward(self, x: torch.Tensor, causal_mask: torch.Tensor, key_padding_mask: torch.Tensor | None = None):
         # Self-attention
         residual = x
         x = self.norm1(x)
@@ -38,8 +38,8 @@ class SASRecBlock(nn.Module):
         residual = x
         x = self.norm2(x)
         x = self.feed_forward(x)
-        x = self.dropout(x) + residual
-
+        x = residual + self.dropout(x)
+        
         return x
 
 
