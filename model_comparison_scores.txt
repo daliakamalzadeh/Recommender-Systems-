@@ -1,0 +1,9 @@
+MODEL COMPARISON (Recall@10, NDCG@10)
+
+  BPR and SASRec use top-10 candidates.
+  Ensemble methods use top-30 candidates per model before reranking to 10.
+
+BPR              Recall@10=0.01200  NDCG@10=0.00745
+SASRec           Recall@10=0.01633  NDCG@10=0.00871
+Ensemble-RRF     Recall@10=0.03267  NDCG@10=0.01938
+Full-Pipeline    Recall@10=0.03233  NDCG@10=0.01891

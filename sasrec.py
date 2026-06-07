@@ -398,8 +398,8 @@ def evaluate(model, data: Dataset, device, max_len: int,
 # --------------------------------------------------------------------------- #
 @torch.no_grad()
 def recommend(model, data: Dataset, user_ids: Sequence[int], device, max_len: int,
-              batch_size: int = 512, pop_blend: float = 0.0) -> Dict[int, List[int]]:
-    """Top-10 raw item_ids per user, using their FULL observed history."""
+              batch_size: int = 512, pop_blend: float = 0.0, top_k: int = TOP_K) -> Dict[int, List[int]]:
+    """Top-k raw item_ids per user, using their FULL observed history."""
     model.eval()
     recs: Dict[int, List[int]] = {}
     pop_ids = [int(data.idx_to_item_id[i]) for i in data.popularity]
@@ -418,13 +418,13 @@ def recommend(model, data: Dataset, user_ids: Sequence[int], device, max_len: in
         scores[:, PAD] = float("-inf")
         for u, row, seen in zip(batch, scores, seens):
             row[list(seen)] = float("-inf")
-            idxs = torch.topk(row, TOP_K).indices.tolist()
+            idxs = torch.topk(row, top_k).indices.tolist()
             recs[u] = [int(data.idx_to_item_id[i]) for i in idxs]
 
     # Any user absent from train (none expected here) -> popularity fallback.
     for u in user_ids:
         if u not in recs:
-            recs[u] = pop_ids[:TOP_K]
+            recs[u] = pop_ids[:top_k]
     return recs
 
 
