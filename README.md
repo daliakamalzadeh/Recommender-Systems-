@@ -6,8 +6,8 @@ popularity blend; a BPR baseline and an RRF + content-metadata ensemble are
 included as documented comparison points.
 
 **Data policy:** all models train **only** on `train.csv`. No external data, no
-pretrained embeddings, no use of test labels. `test.csv` is never read during
-training — its interactions are the held-out future ground truth.
+pretrained embeddings, no use of test labels. `test.csv` is not used during
+training or validation.
 
 ---
 
@@ -81,11 +81,7 @@ python sasrec.py --data-dir . --final --pop-blend 0.20 --epochs 12 \
 ```
 
 The settings (`--epochs 12`, `--pop-blend 0.20`) were selected on the temporal
-validation split (see `sweep.py` and the report's Hyperparameter Analysis). The
-popularity blend is robust to temporal shift and is the main driver of the
-public score. Fixed seeds, deterministic cuDNN, a deterministic split, and a
-seeded dataloader make the run reproducible: same data + same seed → same
-submission.
+validation split (see `sweep.py` and the report's Hyperparameter Analysis). The popularity blend improved local validation performance and provides a robust global prior alongside the SASRec scores. Fixed seeds, deterministic cuDNN, a deterministic split, and a seeded dataloader make the run reproducible: same data + same seed → same submission.
 
 ---
 
@@ -94,7 +90,8 @@ submission.
 The held-out comparison (`model_comparison_scores.txt`) shows SASRec + blend as
 the strongest single model. A BPR + SASRec RRF ensemble and content-metadata
 reranking were tested but did **not** beat SASRec alone, so the official
-submission is SASRec-alone; the ensemble is reported as a negative result.
+submission is SASRec with a popularity blend; the ensemble is reported as a
+negative result.
 
 ---
 
