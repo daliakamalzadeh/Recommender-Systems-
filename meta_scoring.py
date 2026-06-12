@@ -19,7 +19,7 @@ class MetaScorer:
 
     Base score components (all normalised to [0, 1]):
       - quality:    avg_rating * log(rating_count + 1) — confidence-weighted quality
-      - popularity: log(rating_count + 1) — social proof
+      - popularity: log(rating_count + 1) 
       - bsr:        inverse log(Best Sellers Rank) — sales rank within category (33% coverage)
 
     Final base score = 0.45 * quality + 0.35 * popularity + 0.20 * bsr

@@ -1,0 +1,11 @@
+MODEL COMPARISON (Recall@10, NDCG@10)
+
+  All rows scored on a GLOBAL temporal hold-out (no leakage).
+  Standalone and ensemble models share the same held-out candidates.
+  Standalone rows use top-10; ensembles fuse top-30 per model.
+
+Popularity       Recall@10=0.01021  NDCG@10=0.00571
+BPR              Recall@10=0.00629  NDCG@10=0.00338
+SASRec           Recall@10=0.00867  NDCG@10=0.00416
+Ensemble-RRF     Recall@10=0.00867  NDCG@10=0.00434
+Full-Pipeline    Recall@10=0.00850  NDCG@10=0.00401

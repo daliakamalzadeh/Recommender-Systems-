@@ -41,7 +41,7 @@ def parse_submission(df: pd.DataFrame) -> Dict[int, List[int]]:
     result: Dict[int, List[int]] = {}
     for _, row in df.iterrows():
         uid = int(row["user_id"])
-        items = [int(x) for x in str(row["item_id"]).split(",")]
+        items = [int(x) for x in str(row["item_id"]).split(",") if x.strip()]
         result[uid] = items
     return result
 
